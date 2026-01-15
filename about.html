@@ -141,11 +141,23 @@
           padding:70px 20px;
       }
 
-      /* MOBILE */
+     /* MOBILE */
       @media(max-width:900px){
-          .scene{grid-template-columns:1fr;gap:60px;}
-          .scene.reverse .scene-text{order:0;}
-          .intro h1{font-size:36px;}
+          section{padding:80px 0;}
+          .about-grid{grid-template-columns:1fr;}
+          .cards{grid-template-columns:1fr;}
+          .numbers-grid{grid-template-columns:1fr;}
+          .hero h1{font-size:40px;}
+
+          .nav{
+              justify-content:center;
+          }
+          .nav-menu{
+              justify-content:center;
+          }
+          .nav-menu .nav-cta{
+              margin-left:0;
+          }
       }
   </style>
 </head>
