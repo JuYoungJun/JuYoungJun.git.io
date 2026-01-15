@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>커뮤니티 | 품장</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+      :root{
+          --dark:#0f172a;
+          --gray:#6b7280;
+          --light:#f8fafc;
+          --primary:#1e40af;
+          --soft:#eef2ff;
+          --line:#e5e7eb;
+          --max:1200px;
+      }
+
+      *{margin:0;padding:0;box-sizing:border-box;}
+      body{
+          font-family:'Pretendard',sans-serif;
+          background:var(--light);
+          color:var(--dark);
+          line-height:1.8;
+      }
+      a{text-decoration:none;color:inherit;}
+      .container{max-width:var(--max);margin:auto;padding:0 20px;}
+      section{padding:140px 0;}
+
+      /* ================= HEADER ================= */
+      header{
+          position:fixed;
+          top:0;left:0;right:0;
+          background:#fff;
+          border-bottom:1px solid var(--line);
+          z-index:100;
+      }
+      .nav{
+          min-height:72px;
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+      }
+      .logo{font-size:20px;font-weight:800;}
+      .nav-menu{display:flex;gap:6px;}
+      .nav-menu a{
+          padding:10px 18px;
+          border-radius:20px;
+          font-weight:600;
+      }
+      .nav-menu a:hover,
+      .nav-menu .active{
+          background:var(--soft);
+          color:var(--primary);
+      }
+      .nav-cta{
+          background:var(--primary);
+          color:#fff !important;
+      }
+
+      /* ================= INTRO ================= */
+      .intro{
+          padding-top:220px;
+          padding-bottom:120px;
+          text-align:center;
+      }
+      .intro h1{
+          font-size:48px;
+          font-weight:800;
+          margin-bottom:14px;
+      }
+      .intro p{
+          font-size:18px;
+          color:var(--gray);
+      }
+
+      /* ================= TAB ================= */
+      .tab-buttons{
+          display:flex;
+          justify-content:center;
+          gap:14px;
+          margin-bottom:90px;
+      }
+      .tab-buttons button{
+          padding:14px 36px;
+          border-radius:30px;
+          border:1px solid var(--line);
+          background:#fff;
+          font-size:15px;
+          font-weight:600;
+          cursor:pointer;
+      }
+      .tab-buttons button.active{
+          background:var(--primary);
+          color:#fff;
+          border-color:var(--primary);
+      }
+
+      /* ================= LIST ================= */
+      .board-list{
+          display:flex;
+          flex-direction:column;
+          gap:22px;
+      }
+
+      .board-item{
+          background:#fff;
+          border:1px solid var(--line);
+          border-radius:22px;
+          padding:30px 34px;
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          transition:.25s ease;
+      }
+      .board-item:hover{
+          transform:translateY(-4px);
+          box-shadow:0 20px 40px rgba(15,23,42,.08);
+      }
+
+      .board-left{
+          display:flex;
+          align-items:center;
+          gap:18px;
+      }
+
+      .board-badge{
+          min-width:90px;
+          padding:8px 16px;
+          border-radius:20px;
+          font-size:13px;
+          font-weight:700;
+          text-align:center;
+          background:var(--soft);
+          color:var(--primary);
+      }
+
+      .board-title{
+          font-size:17px;
+          font-weight:600;
+      }
+
+      .board-date{
+          font-size:14px;
+          color:var(--gray);
+      }
+
+      /* ================= LOADING ================= */
+      .loading{
+          text-align:center;
+          padding:80px 0 40px;
+          color:var(--gray);
+          font-size:15px;
+      }
+
+      /* ================= FOOTER ================= */
+      footer{
+          background:#020617;
+          color:#94a3b8;
+          text-align:center;
+          padding:80px 20px;
+          font-size:14px;
+          margin-top:140px;
+      }
+
+      /* ================= MOBILE ================= */
+      @media(max-width:900px){
+          section{padding:100px 0;}
+          .board-item{
+              flex-direction:column;
+              align-items:flex-start;
+              gap:14px;
+          }
+      }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo"><a href="index.html">품장 장어구이</a></div>
+    <nav class="nav-menu">
+      <a href="about.html">브랜드 스토리</a>
+      <a href="store_menu.html">매장/메뉴 안내</a>
+      <a href="review.html">후기</a>
+      <a class="active">커뮤니티</a>
+      <a class="nav-cta">스마트스토어</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="intro container">
+    <h1>커뮤니티</h1>
+    <p>공지사항 · FAQ · 이벤트를 안내드립니다</p>
+  </section>
+
+  <div class="tab-buttons">
+    <button class="active" data-type="notice">공지사항</button>
+    <button data-type="faq">FAQ</button>
+    <button data-type="event">이벤트</button>
+  </div>
+
+  <section class="container">
+    <div id="boardList" class="board-list"></div>
+    <div id="loading" class="loading">불러오는 중...</div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 PUMJANG. All rights reserved.
+</footer>
+
+<script>
+  /* ================= 더미 데이터 ================= */
+  const DATA = {
+    notice: Array.from({length:50},(_,i)=>({
+      title:`공지사항 제목 ${i+1}`,
+      date:`2026.01.${(i%28)+1}`,
+      content:'공지사항 상세 내용입니다.'
+    })),
+
+    faq: Array.from({length:12},(_,i)=>({
+      title:`자주 묻는 질문 ${i+1}`,
+      content:'자주 묻는 질문에 대한 답변 내용입니다. 매장 이용 및 주문 관련 안내가 들어갑니다.'
+    })),
+
+    event: Array.from({length:20},(_,i)=>({
+      title:`이벤트 안내 ${i+1}`,
+      date:`2026.02.${(i%28)+1}`,
+      content:'이벤트 상세 설명이 들어갑니다.'
+    }))
+  };
+
+  let currentType = 'notice';
+  let page = 0;
+  const perLoad = 6;
+  let loading = false;
+
+  const listEl = document.getElementById('boardList');
+  const loadingEl = document.getElementById('loading');
+
+  /* ================= LIST LOAD ================= */
+  function loadItems(){
+    if(loading) return;
+    loading = true;
+
+    const start = page * perLoad;
+    const items = DATA[currentType].slice(start, start + perLoad);
+
+    if(items.length === 0){
+      loadingEl.textContent = '마지막 글입니다';
+      return;
+    }
+
+    items.forEach(item=>{
+      const div = document.createElement('div');
+      div.className = 'board-item';
+
+      /* FAQ는 아코디언 */
+      if(currentType === 'faq'){
+        div.innerHTML = `
+          <div class="board-left faq-toggle">
+            <div class="board-badge">FAQ</div>
+            <div class="board-title">${item.title}</div>
+          </div>
+          <div class="faq-content" style="display:none;">
+            ${item.content}
+          </div>
+        `;
+
+        div.querySelector('.faq-toggle').onclick = ()=>{
+          const content = div.querySelector('.faq-content');
+          content.style.display =
+            content.style.display === 'block' ? 'none' : 'block';
+        };
+
+      }else{
+        /* 공지 / 이벤트 */
+        div.innerHTML = `
+          <div class="board-left">
+            <div class="board-badge">${currentType.toUpperCase()}</div>
+            <div class="board-title">${item.title}</div>
+          </div>
+          <div class="board-date">${item.date || ''}</div>
+        `;
+      }
+
+      listEl.appendChild(div);
+    });
+
+    page++;
+    loading = false;
+  }
+
+  /* ================= TAB ================= */
+  document.querySelectorAll('.tab-buttons button').forEach(btn=>{
+    btn.onclick = ()=>{
+      document.querySelectorAll('.tab-buttons button')
+        .forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+
+      currentType = btn.dataset.type;
+      page = 0;
+      listEl.innerHTML = '';
+      loadingEl.textContent = '불러오는 중...';
+      loadItems();
+    };
+  });
+
+  /* ================= SCROLL ================= */
+  window.addEventListener('scroll',()=>{
+    if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 300){
+      loadItems();
+    }
+  });
+
+  loadItems();
+</script>
+
+
+</body>
+</html>
