@@ -10,202 +10,221 @@
   <link rel="icon" href="favicon-32x32.png"/> 
 
   <style>
-      :root{
-          --dark:#0f172a;
-          --gray:#64748b;
-          --light:#f8fafc;
-          --primary:#1e40af;
-          --soft:#eef2ff;
-          --max:1200px;
-      }
-      *{box-sizing:border-box;}
-      body{
-          margin:0;
-          font-family:'Pretendard',sans-serif;
-          background:var(--light);
-          color:var(--dark);
-      }
-      a{text-decoration:none;color:inherit;}
-      img{width:100%;border-radius:16px;}
-      .container{max-width:var(--max);margin:auto;padding:0 20px;}
-      section{padding:120px 0; scroll-margin-top:90px;}
-      h1,h2,h3{margin:0;}
-      p{line-height:1.7;color:var(--gray);}
+    :root{
+      --dark:#0f172a;
+      --gray:#64748b;
+      --light:#f8fafc;
+      --primary:#1e40af;
+      --soft:#eef2ff;
+      --max:1200px;
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family:'Pretendard',sans-serif;
+      background:var(--light);
+      color:var(--dark);
+    }
+    a{text-decoration:none;color:inherit;}
+    img{width:100%;border-radius:16px;}
+    .container{max-width:var(--max);margin:auto;padding:0 20px;}
+    section{padding:120px 0; scroll-margin-top:90px;}
+    h1,h2,h3{margin:0;}
+    p{line-height:1.7;color:var(--gray);}
 
-      /* HEADER */
-      header{
-          position:fixed;
-          top:0;left:0;right:0;
-          background:#fff;
-          border-bottom:1px solid #e5e7eb;
-          z-index:100;
-      }
-      .nav{
-          min-height:72px;
-          display:flex;
-          align-items:center;
-          justify-content:space-between;
-          flex-wrap:wrap;
-          gap:10px;
-      }
-      .logo{font-size:20px;font-weight:800;}
+    /* HEADER */
+    header{
+      position:fixed;
+      top:0;left:0;right:0;
+      background:#fff;
+      border-bottom:1px solid #e5e7eb;
+      z-index:100;
+    }
+    .nav{
+      min-height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .logo{font-size:20px;font-weight:800;}
+    .nav-menu{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:wrap;
+    }
+    .nav-menu a{
+      padding:10px 16px;
+      border-radius:20px;
+      font-weight:600;
+      font-size:15px;
+      color:#334155;
+      transition:.2s;
+      white-space:nowrap;
+    }
+    .nav-menu a:hover{
+      background:var(--soft);
+      color:var(--primary);
+    }
+    .nav-menu .nav-cta{
+      margin-left:10px;
+      background:var(--primary);
+      color:#fff;
+    }
 
-      .nav-menu{
-          display:flex;
-          align-items:center;
-          gap:6px;
-          flex-wrap:wrap;
-      }
-      .nav-menu a{
-          padding:10px 16px;
-          border-radius:20px;
-          font-weight:600;
-          font-size:15px;
-          color:#334155;
-          transition:.2s;
-          white-space:nowrap;
-      }
-      .nav-menu a:hover{
-          background:var(--soft);
-          color:var(--primary);
-      }
-      .nav-menu .nav-cta{
-          margin-left:10px;
-          background:var(--primary);
-          color:#fff;
-      }
+    /* HERO SLIDER */
+    .hero{
+      min-height:100vh;
+      padding-top:72px;
+      position:relative;
+      overflow:hidden;
+      color:#fff;
+    }
+    .hero-slide{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      background-size:cover;
+      background-position:center;
+      opacity:0;
+      transition:opacity .6s ease;
+    }
+    .hero-slide::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:linear-gradient(90deg,rgba(15,23,42,.85),rgba(15,23,42,.4));
+    }
+    .hero-slide.active{opacity:1;}
+    .hero-slide .container{position:relative;z-index:2;}
+    .hero h1{font-size:56px;font-weight:800;margin-bottom:24px;}
+    .hero p{max-width:580px;font-size:18px;color:#e5e7eb;}
+    .cta{
+      display:inline-block;
+      margin-top:36px;
+      padding:18px 34px;
+      background:#fff;
+      color:var(--primary);
+      border-radius:32px;
+      font-weight:700;
+    }
+    .hero-dots{
+      position:absolute;
+      bottom:30px;
+      left:50%;
+      transform:translateX(-50%);
+      display:flex;
+      gap:10px;
+      z-index:10;
+    }
+    .hero-dots button{
+      width:10px;height:10px;
+      border-radius:50%;
+      border:none;
+      background:rgba(255,255,255,.4);
+      cursor:pointer;
+    }
+    .hero-dots button.active{background:#fff;}
 
-      /* HERO */
-      .hero{
-          min-height:100vh;
-          padding-top:72px;
-          display:flex;
-          align-items:center;
-          background:
-                  linear-gradient(90deg,rgba(15,23,42,.85),rgba(15,23,42,.4)),
-                  url('https://images.unsplash.com/photo-1605902711622-cfb43c4437b1') center/cover;
-          color:#fff;
-      }
-      .hero h1{font-size:56px;font-weight:800;margin-bottom:24px;}
-      .hero p{max-width:580px;font-size:18px;color:#e5e7eb;}
-      .cta{
-          display:inline-block;
-          margin-top:36px;
-          padding:18px 34px;
-          background:#fff;
-          color:var(--primary);
-          border-radius:32px;
-          font-weight:700;
-      }
+    /* ABOUT */
+    .about-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:80px;
+      align-items:center;
+    }
+    .about h2{font-size:42px;margin-bottom:20px;}
+    .badge{
+      display:inline-block;
+      padding:6px 14px;
+      background:var(--soft);
+      color:var(--primary);
+      border-radius:20px;
+      font-size:14px;
+      font-weight:600;
+      margin-bottom:14px;
+    }
 
-      /* ABOUT */
-      .about-grid{
-          display:grid;
-          grid-template-columns:1fr 1fr;
-          gap:80px;
-          align-items:center;
-      }
-      .about h2{font-size:42px;margin-bottom:20px;}
-      .badge{
-          display:inline-block;
-          padding:6px 14px;
-          background:var(--soft);
-          color:var(--primary);
-          border-radius:20px;
-          font-size:14px;
-          font-weight:600;
-          margin-bottom:14px;
-      }
+    /* STRENGTH */
+    .strength{background:#fff;}
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:32px;
+    }
+    .card{
+      padding:42px;
+      border-radius:20px;
+      border:1px solid #e5e7eb;
+    }
 
-      /* STRENGTH */
-      .strength{background:#fff;}
-      .cards{
-          display:grid;
-          grid-template-columns:repeat(3,1fr);
-          gap:32px;
-      }
-      .card{
-          padding:42px;
-          border-radius:20px;
-          border:1px solid #e5e7eb;
-      }
+    /* NUMBERS */
+    .numbers{background:var(--dark);color:#fff;}
+    .numbers-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:40px;
+      text-align:center;
+    }
+    .num{font-size:40px;font-weight:800;margin-bottom:10px;}
+    .numbers p{color:#c7d2fe}
 
-      /* NUMBERS */
-      .numbers{background:var(--dark);color:#fff;}
-      .numbers-grid{
-          display:grid;
-          grid-template-columns:repeat(3,1fr);
-          gap:40px;
-          text-align:center;
-      }
-      .num{font-size:40px;font-weight:800;margin-bottom:10px;}
-      .numbers p{color:#c7d2fe}
+    /* VIDEO */
+    .video-wrap{max-width:900px;margin:auto;}
+    .video{
+      position:relative;
+      padding-bottom:56.25%;
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 30px 60px rgba(0,0,0,.15);
+    }
+    .video iframe{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:0;
+    }
 
-      /* VIDEO */
-      .video-wrap{max-width:900px;margin:auto;}
-      .video{
-          position:relative;
-          padding-bottom:56.25%;
-          border-radius:20px;
-          overflow:hidden;
-          box-shadow:0 30px 60px rgba(0,0,0,.15);
-      }
-      .video iframe{
-          position:absolute;
-          inset:0;
-          width:100%;
-          height:100%;
-          border:0;
-      }
+    /* FAQ */
+    .faq{background:#fff;}
+    .faq-list{max-width:800px;margin-top:40px;}
+    .faq-item{
+      border-bottom:1px solid #e5e7eb;
+      padding:24px 0;
+    }
 
-      /* FAQ */
-      .faq{background:#fff;}
-      .faq-list{max-width:800px;margin-top:40px;}
-      .faq-item{
-          border-bottom:1px solid #e5e7eb;
-          padding:24px 0;
-      }
-      .faq-item h3{font-size:18px;margin-bottom:10px;}
+    /* FINAL */
+    .final-cta{text-align:center;background:#fff;}
+    .final-cta h2{font-size:38px;margin-bottom:18px;}
+    .final-cta a{
+      display:inline-block;
+      margin-top:28px;
+      padding:18px 36px;
+      background:var(--primary);
+      color:#fff;
+      border-radius:32px;
+      font-weight:700;
+    }
 
-      /* FINAL */
-      .final-cta{text-align:center;background:#fff;}
-      .final-cta h2{font-size:38px;margin-bottom:18px;}
-      .final-cta a{
-          display:inline-block;
-          margin-top:28px;
-          padding:18px 36px;
-          background:var(--primary);
-          color:#fff;
-          border-radius:32px;
-          font-weight:700;
-      }
+    footer{
+      background:#020617;
+      color:#94a3b8;
+      text-align:center;
+      padding:50px 20px;
+      font-size:14px;
+    }
 
-      footer{
-          background:#020617;
-          color:#94a3b8;
-          text-align:center;
-          padding:50px 20px;
-          font-size:14px;
-      }
-
-      /* MOBILE */
-      @media(max-width:900px){
-          section{padding:80px 0;}
-          .about-grid{grid-template-columns:1fr;}
-          .cards{grid-template-columns:1fr;}
-          .numbers-grid{grid-template-columns:1fr;}
-          .hero h1{font-size:40px;}
-
-          .nav{
-              justify-content:center;
-          }
-          .nav-menu{
-              justify-content:center;
-          }
-          .nav-menu .nav-cta{
-              margin-left:0;
-          }
-      }
+    @media(max-width:900px){
+      section{padding:80px 0;}
+      .about-grid{grid-template-columns:1fr;}
+      .cards{grid-template-columns:1fr;}
+      .numbers-grid{grid-template-columns:1fr;}
+      .hero h1{font-size:40px;}
+    }
   </style>
 </head>
 
@@ -230,20 +249,44 @@
 
 <main>
 
+  <!-- HERO -->
   <section class="hero">
-    <div class="container">
-      <h1>신뢰로 선택받는<br>품장 스마트스토어</h1>
-      <p>
-        단기 매출보다 신뢰를 먼저 생각합니다.<br>
-        직접 검증한 상품만 판매하고,<br>
-        문제가 생기면 끝까지 책임집니다.
-      </p>
-      <a class="cta" href="https://smartstore.naver.com/samwon1238" target="_blank">
-        후기 보고 결정하기
-      </a>
+    <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1605902711622-cfb43c4437b1')">
+      <div class="container">
+        <h1>신뢰로 선택받는<br>품장 스마트스토어</h1>
+        <p>
+          단기 매출보다 신뢰를 먼저 생각합니다.<br>
+          직접 검증한 상품만 판매하고,<br>
+          문제가 생기면 끝까지 책임집니다.
+        </p>
+        <a class="cta" href="https://smartstore.naver.com/samwon1238" target="_blank">
+          후기 보고 결정하기
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1556745753-b2904692b3cd')">
+      <div class="container">
+        <h1>검증된 상품만<br>판매합니다</h1>
+        <p>직접 확인한 상품만 취급합니다.</p>
+      </div>
+    </div>
+
+    <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1607082349566-1870e0d2b0c4')">
+      <div class="container">
+        <h1>재구매로 증명된<br>신뢰</h1>
+        <p>다시 찾는 고객을 만듭니다.</p>
+      </div>
+    </div>
+
+    <div class="hero-dots">
+      <button class="active"></button>
+      <button></button>
+      <button></button>
     </div>
   </section>
 
+  <!-- ABOUT -->
   <section class="about" id="about">
     <div class="container about-grid">
       <div>
@@ -260,6 +303,7 @@
     </div>
   </section>
 
+  <!-- STRENGTH -->
   <section class="strength" id="strength">
     <div class="container">
       <div class="cards">
@@ -279,6 +323,7 @@
     </div>
   </section>
 
+  <!-- NUMBERS -->
   <section class="numbers" id="numbers">
     <div class="container numbers-grid">
       <div>
@@ -296,58 +341,45 @@
     </div>
   </section>
 
+  <!-- VIDEO -->
   <section style="background:#fff;">
     <div class="container">
       <span class="badge">Video Contents</span>
       <h2 style="font-size:38px;margin-bottom:12px;">영상으로 확인하는 품장</h2>
-
-      <!-- 안내 문구 -->
-      <p style="
-      font-size:14px;
-      color:#94a3b8;
-      margin-bottom:28px;
-      max-width:720px;
-      line-height:1.6;
-    ">
-        ※ 본 영상은 브랜드 이해를 돕기 위한 참고용 콘텐츠로 임시 사용 중입니다.<br>
-        본 페이지 운영자는 영상의 원작자가 아니며,
-        빠른 시일 내 자체 제작 영상으로 교체될 예정입니다.
+      <p style="font-size:14px;color:#94a3b8;margin-bottom:28px;max-width:720px;">
+        ※ 본 영상은 참고용 콘텐츠입니다.
       </p>
-
       <div class="video-wrap">
         <div class="video">
-          <iframe
-            src="https://www.youtube.com/embed/In8nVuItVro?autoplay=1&mute=1&playsinline=1"
-            allow="autoplay; fullscreen"
-            allowfullscreen>
-          </iframe>
+          <iframe src="https://www.youtube.com/embed/In8nVuItVro?autoplay=1&mute=1" allow="autoplay; fullscreen"></iframe>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- FAQ -->
   <section class="faq" id="faq">
     <div class="container">
       <span class="badge">FAQ</span>
       <h2>자주 묻는 질문</h2>
-
       <div class="faq-list">
         <div class="faq-item">
           <h3>Q. 배송은 얼마나 걸리나요?</h3>
-          <p>주문 확인 후 평균 1~2일 내 출고를 목표로 운영하고 있습니다.</p>
+          <p>주문 확인 후 평균 1~2일 내 출고됩니다.</p>
         </div>
         <div class="faq-item">
           <h3>Q. 교환·환불은 가능한가요?</h3>
-          <p>네이버 스마트스토어 정책에 따라 공정하고 투명하게 처리됩니다.</p>
+          <p>네이버 스마트스토어 정책에 따릅니다.</p>
         </div>
         <div class="faq-item">
-          <h3>Q. 문제가 발생하면 어떻게 하나요?</h3>
-          <p>책임을 회피하지 않고 끝까지 응대하는 것을 원칙으로 합니다.</p>
+          <h3>Q. 문제가 발생하면?</h3>
+          <p>끝까지 책임지고 응대합니다.</p>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- FINAL CTA -->
   <section class="final-cta">
     <div class="container">
       <h2>지금 품장을 확인해보세요</h2>
@@ -365,6 +397,23 @@
   <p>본 페이지는 GitHub Pages용 홍보 랜딩 페이지입니다.</p>
   <p>© 2026 SAMWON STORE. All rights reserved.</p>
 </footer>
+
+<script>
+  const slides = document.querySelectorAll('.hero-slide');
+  const dots = document.querySelectorAll('.hero-dots button');
+  let index = 0;
+
+  function showSlide(i){
+    slides.forEach(s=>s.classList.remove('active'));
+    dots.forEach(d=>d.classList.remove('active'));
+    slides[i].classList.add('active');
+    dots[i].classList.add('active');
+    index = i;
+  }
+
+  dots.forEach((d,i)=>d.onclick=()=>showSlide(i));
+  setInterval(()=>showSlide((index+1)%slides.length),2500);
+</script>
 
 </body>
 </html>
