@@ -1,377 +1,449 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <title>매장 / 메뉴 안내 | 품장</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" href="favicon-32x32.png"/> 
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="icon" href="favicon-32x32.png" />
 
   <style>
-      :root{
-          --dark:#0f172a;
-          --gray:#6b7280;
-          --light:#f8fafc;
-          --primary:#1e40af;
-          --soft:#eef2ff;
-          --line:#e5e7eb;
-          --max:1200px;
+    :root {
+      --dark: #0f172a;
+      --gray: #6b7280;
+      --light: #f8fafc;
+      --primary: #1e40af;
+      --soft: #eef2ff;
+      --line: #e5e7eb;
+      --max: 1200px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Pretendard', sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.8;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      max-width: var(--max);
+      margin: auto;
+      padding: 0 20px;
+    }
+
+    section {
+      padding: 140px 0;
+    }
+
+    p {
+      color: var(--gray);
+    }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      z-index: 100;
+    }
+
+    .nav {
+      min-height: 72px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 6px;
+    }
+
+    .nav-menu a {
+      padding: 10px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .nav-menu a:hover {
+      background: var(--soft);
+      color: var(--primary);
+    }
+
+    .nav-cta {
+      background: var(--primary);
+      color: #fff !important;
+    }
+
+    /* INTRO */
+    .intro {
+      padding-top: 220px;
+      padding-bottom: 160px;
+      text-align: center;
+    }
+
+    .intro h1 {
+      font-size: 46px;
+      margin-bottom: 24px;
+    }
+
+    /* TAB BUTTON */
+    .tab-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 80px;
+    }
+
+    .tab-buttons button {
+      padding: 14px 34px;
+      border-radius: 30px;
+      border: 1px solid var(--line);
+      background: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .tab-buttons button.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* SECTION HEAD */
+    .section-head {
+      max-width: 720px;
+      margin-bottom: 70px;
+    }
+
+    .section-head span {
+      display: block;
+      font-size: 13px;
+      letter-spacing: .18em;
+      color: var(--primary);
+      margin-bottom: 14px;
+    }
+
+    .section-head h2 {
+      font-size: 38px;
+    }
+
+    /* MAP */
+    .map-wrap {
+      margin-bottom: 60px;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+
+    /* STORE INFO */
+    .store-info {
+      margin-top: 30px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .store-info div {
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: 20px;
+      border-radius: 16px;
+      font-size: 15px;
+    }
+
+    /* GALLERY */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 26px;
+      margin: 80px 0 120px;
+    }
+
+    .gallery div {
+      aspect-ratio: 4/3;
+      border-radius: 22px;
+      background: #ddd center/cover;
+    }
+
+    /* MENU */
+    .menu-category {
+      margin-bottom: 120px;
+    }
+
+    .menu-title {
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+
+    .menu-item {
+      background: #fff;
+      border-radius: 26px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .menu-thumb {
+      aspect-ratio: 4/3;
+      background: #ddd center/cover;
+    }
+
+    .menu-text {
+      padding: 24px;
+    }
+
+    .menu-text h4 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .menu-text .price {
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 14px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #020617;
+      color: #94a3b8;
+      text-align: center;
+      padding: 60px 20px;
+      font-size: 14px;
+    }
+
+    /* MOBILE */
+    @media(max-width:900px) {
+      section {
+        padding: 80px 0;
       }
 
-      *{margin:0;padding:0;box-sizing:border-box;}
-      body{
-          font-family:'Pretendard',sans-serif;
-          background:var(--light);
-          color:var(--dark);
-          line-height:1.8;
-      }
-      a{text-decoration:none;color:inherit;}
-      .container{max-width:var(--max);margin:auto;padding:0 20px;}
-      section{padding:140px 0;}
-      p{color:var(--gray);}
-
-      /* HEADER */
-      header{
-          position:fixed;
-          top:0;left:0;right:0;
-          background:#fff;
-          border-bottom:1px solid var(--line);
-          z-index:100;
-      }
-      .nav{
-          min-height:72px;
-          display:flex;
-          justify-content:space-between;
-          align-items:center;
-      }
-      .logo{font-size:20px;font-weight:800;}
-      .nav-menu{display:flex;gap:6px;}
-      .nav-menu a{
-          padding:10px 16px;
-          border-radius:20px;
-          font-weight:600;
-          font-size:15px;
-      }
-      .nav-menu a:hover{
-          background:var(--soft);
-          color:var(--primary);
-      }
-      .nav-cta{
-          background:var(--primary);
-          color:#fff !important;
+      .about-grid {
+        grid-template-columns: 1fr;
       }
 
-      /* INTRO */
-      .intro{
-          padding-top:220px;
-          padding-bottom:160px;
-          text-align:center;
-      }
-      .intro h1{
-          font-size:46px;
-          margin-bottom:24px;
+      .cards {
+        grid-template-columns: 1fr;
       }
 
-      /* TAB BUTTON */
-      .tab-buttons{
-          display:flex;
-          justify-content:center;
-          gap:14px;
-          margin-bottom:80px;
-      }
-      .tab-buttons button{
-          padding:14px 34px;
-          border-radius:30px;
-          border:1px solid var(--line);
-          background:#fff;
-          font-size:15px;
-          font-weight:600;
-          cursor:pointer;
-      }
-      .tab-buttons button.active{
-          background:var(--primary);
-          color:#fff;
-          border-color:var(--primary);
+      .numbers-grid {
+        grid-template-columns: 1fr;
       }
 
-      /* SECTION HEAD */
-      .section-head{
-          max-width:720px;
-          margin-bottom:70px;
-      }
-      .section-head span{
-          display:block;
-          font-size:13px;
-          letter-spacing:.18em;
-          color:var(--primary);
-          margin-bottom:14px;
-      }
-      .section-head h2{
-          font-size:38px;
+      .hero h1 {
+        font-size: 40px;
       }
 
-      /* MAP */
-      .map-wrap{
-          margin-bottom:60px;
-          border-radius:24px;
-          overflow:hidden;
-          border:1px solid var(--line);
+      .nav {
+        justify-content: center;
       }
 
-      /* STORE INFO */
-      .store-info{
-          margin-top:30px;
-          display:grid;
-          grid-template-columns:repeat(2,1fr);
-          gap:20px;
-      }
-      .store-info div{
-          background:#fff;
-          border:1px solid var(--line);
-          padding:20px;
-          border-radius:16px;
-          font-size:15px;
+      .nav-menu {
+        justify-content: center;
       }
 
-      /* GALLERY */
-      .gallery{
-          display:grid;
-          grid-template-columns:repeat(4,1fr);
-          gap:26px;
-          margin:80px 0 120px;
+      .nav-menu .nav-cta {
+        margin-left: 0;
       }
-      .gallery div{
-          aspect-ratio:4/3;
-          border-radius:22px;
-          background:#ddd center/cover;
-      }
+    }
 
-      /* MENU */
-      .menu-category{
-          margin-bottom:120px;
-      }
-      .menu-title{
-          font-size:28px;
-          margin-bottom:30px;
-      }
-      .menu-grid{
-          display:grid;
-          grid-template-columns:repeat(3,1fr);
-          gap:32px;
-      }
-      .menu-item{
-          background:#fff;
-          border-radius:26px;
-          border:1px solid var(--line);
-          overflow:hidden;
-      }
-      .menu-thumb{
-          aspect-ratio:4/3;
-          background:#ddd center/cover;
-      }
-      .menu-text{
-          padding:24px;
-      }
-      .menu-text h4{
-          font-size:18px;
-          margin-bottom:10px;
-      }
-      .menu-text .price{
-          font-weight:700;
-          color:var(--primary);
-          margin-top:14px;
-      }
+    .store-info div {
+      margin-bottom: 12px;
+    }
 
-      /* FOOTER */
-      footer{
-          background:#020617;
-          color:#94a3b8;
-          text-align:center;
-          padding:60px 20px;
-          font-size:14px;
-      }
+    .store-info b {
+      display: inline-block;
+      margin-bottom: 4px;
+    }
 
-      /* MOBILE */
-      @media(max-width:900px){
-          section{padding:80px 0;}
-          .about-grid{grid-template-columns:1fr;}
-          .cards{grid-template-columns:1fr;}
-          .numbers-grid{grid-template-columns:1fr;}
-          .hero h1{font-size:40px;}
-
-          .nav{
-              justify-content:center;
-          }
-          .nav-menu{
-              justify-content:center;
-          }
-          .nav-menu .nav-cta{
-              margin-left:0;
-          }
-      }
-
-          .store-info div {
-              margin-bottom: 12px;
-          }
-
-.store-info b {
-  display: inline-block;
-  margin-bottom: 4px;
-}
-
-.store-info .note {
-  color: #666;
-  font-size: 0.9em;
-}
+    .store-info .note {
+      color: #666;
+      font-size: 0.9em;
+    }
   </style>
 </head>
 
 <body>
 
-<header>
-  <div class="container nav">
-    <div class="logo"><a href="index.html">품장 장어구이</a></div>
-    <nav class="nav-menu">
-      <a href="about.html">브랜드 스토리</a>
-      <a style="background:var(--soft);color:var(--primary);">매장 / 메뉴</a>
-      <a href="review.html">후기</a>
-      <a href="community.html">커뮤니티</a>
-      <a class="nav-cta">스마트스토어</a>
-    </nav>
-  </div>
-</header>
+  <header>
+    <div class="container nav">
+      <div class="logo"><a href="index.html">품장 장어구이</a></div>
+      <nav class="nav-menu">
+        <a href="about.html">브랜드 스토리</a>
+        <a style="background:var(--soft);color:var(--primary);">매장 / 메뉴</a>
+        <a href="review.html">후기</a>
+        <a href="community.html">커뮤니티</a>
+        <a class="nav-cta">스마트스토어</a>
+      </nav>
+    </div>
+  </header>
 
-<main>
+  <main>
 
-  <section class="intro container">
-    <h1>매장 & 메뉴 안내</h1>
-    <p>공간부터 한 접시까지, 품장의 기준을 소개합니다.</p>
-  </section>
+    <section class="intro container">
+      <h1>매장 & 메뉴 안내</h1>
+      <p>공간부터 한 접시까지, 품장의 기준을 소개합니다.</p>
+    </section>
 
-  <div class="tab-buttons">
-    <button class="active" onclick="showTab('store')">매장 안내</button>
-    <button onclick="showTab('menu')">메뉴 안내</button>
-  </div>
-
-  <!-- STORE -->
-  <section id="store" class="container">
-
-    <div class="section-head">
-      <span>STORE</span>
-      <h2>매장 안내</h2>
+    <div class="tab-buttons">
+      <button class="active" onclick="showTab('store')">매장 안내</button>
+      <button onclick="showTab('menu')">메뉴 안내</button>
     </div>
 
-    <div class="map-wrap">
-      <!-- 카카오맵 -->
-      <div id="daumRoughmapContainer1768439353231"
-           class="root_daum_roughmap root_daum_roughmap_landing"></div>
-    </div>
+    <!-- STORE -->
+    <section id="store" class="container">
 
-    <div class="store-info">
-      <div><b>주소</b><br>전라남도 나주시 노안면 건재로 524-11 (노안면, 품장장어구이)</div>
-      <!-- <div><b>영업시간</b><br>11:30 - 21:30(15:00 - 17:00 브레이크 타임 주말 브레이크 타임없음)</div> -->
-      <div><b>영업시간</b><br>매일 11:30 - 21:30<br>브레이크 타임 15:00 - 17:00<br><span class="note">※ 주말 브레이크 타임 없음</span></div>
-      <div><b>전화번호</b><br>061-334-1300</div>
-      <div><b>주차</b><br>매장 앞 주차 가능</div>
-    </div>
+      <div class="section-head">
+        <span>STORE</span>
+        <h2>매장 안내</h2>
+      </div>
 
-    <div class="gallery">
-      <div></div><div></div><div></div><div></div>
-    </div>
+      <div class="map-wrap">
+        <!-- 카카오맵 -->
+        <div id="daumRoughmapContainer1768439353231" class="root_daum_roughmap root_daum_roughmap_landing"></div>
+      </div>
 
-    <div class="gallery">
-      <div></div><div></div><div></div><div></div>
-    </div>
+      <div class="store-info">
+        <div><b>주소</b><br>전라남도 나주시 노안면 건재로 524-11 (노안면, 품장장어구이)</div>
+        <!-- <div><b>영업시간</b><br>11:30 - 21:30(15:00 - 17:00 브레이크 타임 주말 브레이크 타임없음)</div> -->
+        <div><b>영업시간</b><br>매일 11:30 - 21:30<br>브레이크 타임 15:00 - 17:00<br><span class="note">※ 주말 브레이크 타임 없음</span></div>
+        <div><b>전화번호</b><br>061-334-1300</div>
+        <div><b>주차</b><br>매장 앞 주차 가능</div>
+      </div>
 
-  </section>
+      <div class="gallery">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
 
-  <!-- MENU -->
-  <section id="menu" class="container" style="display:none;">
+      <div class="gallery">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
 
-    <div class="section-head">
-      <span>MENU</span>
-      <h2>대표 메뉴</h2>
-    </div>
+    </section>
 
-    <div class="menu-category">
-      <div class="menu-title">메인 메뉴</div>
-      <div class="menu-grid">
-        <div class="menu-item">
-          <div class="menu-thumb"></div>
-          <div class="menu-text">
-            <h4>민물 장어구이</h4>
-            <p>숯불 향이 살아있는 대표 메뉴</p>
-            <div class="price">₩35,000</div>
+    <!-- MENU -->
+    <section id="menu" class="container" style="display:none;">
+
+      <div class="section-head">
+        <span>MENU</span>
+        <h2>대표 메뉴</h2>
+      </div>
+
+      <div class="menu-category">
+        <div class="menu-title">메인 메뉴</div>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-thumb"></div>
+            <div class="menu-text">
+              <h4>민물 장어구이</h4>
+              <p>숯불 향이 살아있는 대표 메뉴</p>
+              <div class="price">₩35,000</div>
+            </div>
           </div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-thumb"></div>
-          <div class="menu-text">
-            <h4>장어 정식</h4>
-            <p>균형 잡힌 한 상 구성</p>
-            <div class="price">₩42,000</div>
+          <div class="menu-item">
+            <div class="menu-thumb"></div>
+            <div class="menu-text">
+              <h4>장어 정식</h4>
+              <p>균형 잡힌 한 상 구성</p>
+              <div class="price">₩42,000</div>
+            </div>
           </div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-thumb"></div>
-          <div class="menu-text">
-            <h4>장어 덮밥</h4>
-            <p>특제 소스 덮밥</p>
-            <div class="price">₩28,000</div>
+          <div class="menu-item">
+            <div class="menu-thumb"></div>
+            <div class="menu-text">
+              <h4>장어 덮밥</h4>
+              <p>특제 소스 덮밥</p>
+              <div class="price">₩28,000</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="menu-category">
-      <div class="menu-title">사이드 메뉴</div>
-      <div class="menu-grid">
-        <div class="menu-item">
-          <div class="menu-thumb"></div>
-          <div class="menu-text">
-            <h4>장어탕</h4>
-            <div class="price">₩18,000</div>
+      <div class="menu-category">
+        <div class="menu-title">사이드 메뉴</div>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div class="menu-thumb"></div>
+            <div class="menu-text">
+              <h4>장어탕</h4>
+              <div class="price">₩18,000</div>
+            </div>
           </div>
-        </div>
-        <div class="menu-item">
-          <div class="menu-thumb"></div>
-          <div class="menu-text">
-            <h4>꼬리구이</h4>
-            <div class="price">₩12,000</div>
+          <div class="menu-item">
+            <div class="menu-thumb"></div>
+            <div class="menu-text">
+              <h4>꼬리구이</h4>
+              <div class="price">₩12,000</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-  </section>
+    </section>
 
-</main>
+  </main>
 
-<footer>
-  © 2026 PUMJANG. All rights reserved.
-</footer>
+  <footer>
+    © 2026 PUMJANG. All rights reserved.
+  </footer>
 
-<!-- KAKAO MAP -->
-<script charset="UTF-8" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
-<script>
-  new daum.roughmap.Lander({
-    "timestamp":"1768439353231",
-    "key":"g299vg4ev9o",
-    "mapWidth":"100%",
-    "mapHeight":"360"
-  }).render();
-</script>
+  <!-- KAKAO MAP -->
+  <script charset="UTF-8" src="https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js"></script>
+  <script>
+    new daum.roughmap.Lander({
+      "timestamp": "1768439353231",
+      "key": "g299vg4ev9o",
+      "mapWidth": "100%",
+      "mapHeight": "360"
+    }).render();
+  </script>
 
-<script>
-  function showTab(tab){
-    document.getElementById('store').style.display = tab==='store'?'block':'none';
-    document.getElementById('menu').style.display = tab==='menu'?'block':'none';
-    document.querySelectorAll('.tab-buttons button').forEach(btn=>btn.classList.remove('active'));
-    event.target.classList.add('active');
-  }
-</script>
+  <script>
+    function showTab(tab) {
+      document.getElementById('store').style.display = tab === 'store' ? 'block' : 'none';
+      document.getElementById('menu').style.display = tab === 'menu' ? 'block' : 'none';
+      document.querySelectorAll('.tab-buttons button').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+  </script>
 
 </body>
+
 </html>
