@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>고객 후기 | 품장</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+      :root{
+          --dark:#0f172a;
+          --gray:#6b7280;
+          --light:#f8fafc;
+          --primary:#1e40af;
+          --soft:#eef2ff;
+          --line:#e5e7eb;
+          --max:1200px;
+      }
+
+      *{margin:0;padding:0;box-sizing:border-box;}
+      body{
+          font-family:'Pretendard',sans-serif;
+          background:var(--light);
+          color:var(--dark);
+          line-height:1.8;
+      }
+      a{text-decoration:none;color:inherit;}
+      .container{max-width:var(--max);margin:auto;padding:0 20px;}
+      section{padding:140px 0;}
+
+      /* ================= HEADER ================= */
+      header{
+          position:fixed;
+          top:0;left:0;right:0;
+          background:#fff;
+          border-bottom:1px solid var(--line);
+          z-index:100;
+      }
+      .nav{
+          min-height:72px;
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+      }
+      .logo{font-size:20px;font-weight:800;}
+      .nav-menu{display:flex;gap:6px;}
+      .nav-menu a{
+          padding:10px 18px;
+          border-radius:20px;
+          font-weight:600;
+      }
+      .nav-menu a:hover{
+          background:var(--soft);
+          color:var(--primary);
+      }
+      .nav-menu .active{
+          background:var(--soft);
+          color:var(--primary);
+      }
+      .nav-cta{
+          background:var(--primary);
+          color:#fff !important;
+      }
+
+      /* ================= INTRO ================= */
+      .intro{
+          padding-top:220px;
+          padding-bottom:120px;
+          text-align:center;
+      }
+      .intro h1{
+          font-size:48px;
+          font-weight:800;
+          margin-bottom:16px;
+      }
+      .intro p{
+          font-size:18px;
+          color:var(--gray);
+      }
+
+      /* ================= FILTER ================= */
+      .review-filter{
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          margin-bottom:100px;
+      }
+
+      /* ================= REVIEW GRID ================= */
+      .review-grid{
+          display:grid;
+          grid-template-columns:repeat(3,1fr);
+          gap:42px;
+          margin-bottom:160px; /* ⭐ 페이지네이션과 확실히 분리 */
+      }
+
+      .review-card{
+          background:#fff;
+          border-radius:32px;
+          border:1px solid var(--line);
+          padding:36px;
+          display:flex;
+          flex-direction:column;
+      }
+
+      .review-meta{
+          display:flex;
+          justify-content:space-between;
+          margin-bottom:18px;
+      }
+
+      .review-star{
+          color:#fbbf24;
+          margin-bottom:18px;
+      }
+
+      .review-content{
+          font-size:16px;
+          color:#374151;
+          margin-bottom:30px;
+      }
+
+      .review-date{
+          margin-top:auto;
+          font-size:13px;
+          color:#9ca3af;
+          padding-top:24px;
+          border-top:1px solid var(--line);
+      }
+
+      /* ================= PAGINATION ================= */
+      .pagination-wrap{
+          margin-top:40px;
+          padding:100px 0 60px; /* ⭐ 위/아래 여백 확보 */
+          border-top:1px solid var(--line);
+          background:linear-gradient(
+                  to bottom,
+                  rgba(248,250,252,0) 0%,
+                  rgba(248,250,252,1) 40%
+          );
+      }
+
+      .pagination{
+          display:flex;
+          justify-content:center;
+          gap:14px;
+      }
+
+      .pagination button{
+          min-width:48px;
+          height:48px;
+          border-radius:16px;
+          border:1px solid var(--line);
+          background:#fff;
+          font-weight:600;
+          cursor:pointer;
+      }
+
+      .pagination button.active{
+          background:var(--primary);
+          color:#fff;
+          border-color:var(--primary);
+      }
+
+      /* ================= FOOTER ================= */
+      footer{
+          background:#020617;
+          color:#94a3b8;
+          text-align:center;
+          padding:80px 20px;
+          font-size:14px;
+      }
+
+      /* ================= MOBILE ================= */
+      @media(max-width:900px){
+          section{padding:100px 0;}
+          .review-grid{grid-template-columns:1fr;}
+          .review-filter{
+              flex-direction:column;
+              align-items:flex-start;
+              gap:20px;
+          }
+      }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">
+      <a href="index.html">품장 장어구이</a>
+    </div>
+    <nav class="nav-menu">
+      <a href="about.html">브랜드 스토리</a>
+      <a href="store_menu.html">매장/메뉴 안내</a>
+      <a style="background:var(--soft);color:var(--primary);">후기</a>
+      <a href="community.html">커뮤니티</a>
+      <a class="nav-cta" href="https://smartstore.naver.com/samwon1238" target="_blank">
+        스마트스토어
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="intro container">
+    <h1>고객 후기</h1>
+    <p>품장을 다시 찾게 되는 이유</p>
+  </section>
+
+  <section class="container">
+    <div id="reviewList" class="review-grid"></div>
+
+    <div class="pagination-wrap">
+      <div id="pagination" class="pagination"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 PUMJANG. All rights reserved.
+</footer>
+
+<script>
+  /* ================= 더미 데이터 ================= */
+  const reviews = Array.from({length:100},(_,i)=>({
+    user:'네이버페이 구매자',
+    source:'NAVER',
+    star:'★★★★★',
+    content:'장어가 정말 신선하고 잡내 없이 깔끔합니다.',
+    date:'2026.01.'+(i%30+1)
+  }));
+
+  const perPage = 6;          // 페이지당 리뷰 수
+  const pageGroupSize = 10;   // 페이지 그룹 단위
+  let currentPage = 1;
+
+  /* ================= 리뷰 렌더 ================= */
+  function renderReviews(){
+    const start = (currentPage - 1) * perPage;
+    const list = reviews.slice(start, start + perPage);
+
+    document.getElementById('reviewList').innerHTML =
+      list.map(r => `
+        <div class="review-card">
+          <div class="review-meta">
+            <strong>${r.user}</strong>
+            <span>${r.source}</span>
+          </div>
+          <div class="review-star">${r.star}</div>
+          <div class="review-content">${r.content}</div>
+          <div class="review-date">${r.date}</div>
+        </div>
+      `).join('');
+  }
+
+  /* ================= 페이지네이션 렌더 ================= */
+  function renderPagination(){
+    const totalPage = Math.ceil(reviews.length / perPage);
+    const pagination = document.getElementById('pagination');
+    pagination.innerHTML = '';
+
+    const currentGroup = Math.floor((currentPage - 1) / pageGroupSize);
+    const startPage = currentGroup * pageGroupSize + 1;
+    const endPage = Math.min(startPage + pageGroupSize - 1, totalPage);
+
+    /* << 이전 그룹 */
+    if(currentGroup > 0){
+      pagination.appendChild(createButton('<<', startPage - pageGroupSize));
+    }
+
+    /* < 이전 페이지 */
+    if(currentPage > 1){
+      pagination.appendChild(createButton('<', currentPage - 1));
+    }
+
+    /* 페이지 번호 */
+    for(let i = startPage; i <= endPage; i++){
+      const btn = createButton(i, i);
+      if(i === currentPage) btn.classList.add('active');
+      pagination.appendChild(btn);
+    }
+
+    /* > 다음 페이지 */
+    if(currentPage < totalPage){
+      pagination.appendChild(createButton('>', currentPage + 1));
+    }
+
+    /* >> 다음 그룹 */
+    if(endPage < totalPage){
+      pagination.appendChild(createButton('>>', startPage + pageGroupSize));
+    }
+  }
+
+  /* ================= 버튼 생성 ================= */
+  function createButton(text, page){
+    const btn = document.createElement('button');
+    btn.textContent = text;
+    btn.onclick = () => {
+      currentPage = page;
+      update();
+    };
+    return btn;
+  }
+
+  /* ================= 업데이트 ================= */
+  function update(){
+    renderReviews();
+    renderPagination();
+    window.scrollTo({ top: 350, behavior: 'smooth' });
+  }
+
+  update();
+</script>
+
+</body>
+</html>
