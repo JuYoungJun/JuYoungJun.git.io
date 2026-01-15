@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>브랜드 스토리 | 품장</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+      :root{
+          --dark:#0f172a;
+          --gray:#6b7280;
+          --light:#f8fafc;
+          --primary:#1e40af;
+          --soft:#eef2ff;
+          --line:#e5e7eb;
+          --max:1200px;
+      }
+      *{margin:0;padding:0;box-sizing:border-box;}
+      body{
+          font-family:'Pretendard',sans-serif;
+          background:var(--light);
+          color:var(--dark);
+          line-height:1.9;
+      }
+      .container{max-width:var(--max);margin:auto;padding:0 20px;}
+      section{padding:180px 0;}
+      a{text-decoration:none;color:inherit;}
+
+      /* ===== index NAV 그대로 ===== */
+      header{
+          position:fixed;
+          top:0;left:0;right:0;
+          background:#fff;
+          border-bottom:1px solid var(--line);
+          z-index:100;
+      }
+      .nav{
+          min-height:72px;
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+      }
+      .logo{font-size:20px;font-weight:800;}
+      .nav-menu{display:flex;gap:6px;}
+      .nav-menu a{
+          padding:10px 16px;
+          border-radius:20px;
+          font-weight:600;
+      }
+      .nav-cta{
+          background:var(--primary);
+          color:#fff !important;
+      }
+
+      /* ===== INTRO ===== */
+      .intro{
+          padding-top:260px;
+          padding-bottom:200px;
+          text-align:center;
+      }
+      .intro h1{
+          font-size:56px;
+          margin-bottom:30px;
+      }
+      .intro p{
+          max-width:720px;
+          margin:auto;
+          font-size:18px;
+          color:var(--gray);
+      }
+
+      /* ===== TAB ===== */
+      .brand-tab{
+          display:flex;
+          justify-content:center;
+          gap:14px;
+          margin-bottom:160px;
+      }
+      .brand-tab button{
+          padding:14px 40px;
+          border-radius:30px;
+          border:1px solid var(--line);
+          background:#fff;
+          font-weight:600;
+          cursor:pointer;
+      }
+      .brand-tab button.active{
+          background:var(--primary);
+          color:#fff;
+          border-color:var(--primary);
+      }
+
+      /* ===== SCENE ===== */
+      .scene{
+          display:grid;
+          grid-template-columns:1fr 1fr;
+          gap:120px;
+          align-items:center;
+          min-height:100vh;
+          opacity:0;
+          transform:translateY(60px);
+          transition:1s ease;
+      }
+      .scene.show{
+          opacity:1;
+          transform:none;
+      }
+      .scene.reverse .scene-text{order:2;}
+
+      .scene-text span{
+          font-size:13px;
+          letter-spacing:.18em;
+          color:var(--primary);
+          font-weight:600;
+      }
+      .scene-text h2{
+          font-size:42px;
+          margin:24px 0;
+      }
+      .scene-text p{
+          max-width:480px;
+          color:var(--gray);
+      }
+
+      .scene-image{
+          aspect-ratio:4/5;
+          border-radius:36px;
+          background:#ddd center/cover;
+      }
+
+      /* ===== SYSTEM ===== */
+      #system{display:none;background:#fff;}
+
+      /* ===== FOOTER ===== */
+      footer{
+          background:#020617;
+          color:#94a3b8;
+          text-align:center;
+          padding:70px 20px;
+      }
+
+      /* MOBILE */
+      @media(max-width:900px){
+          .scene{grid-template-columns:1fr;gap:60px;}
+          .scene.reverse .scene-text{order:0;}
+          .intro h1{font-size:36px;}
+      }
+  </style>
+</head>
+
+<body>
+
+<!-- ✅ NAV (index 그대로) -->
+<header>
+  <div class="container nav">
+    <div class="logo"><a href="index.html">품장 장어구이</a></div>
+    <nav class="nav-menu">
+      <a style="background:var(--soft);color:var(--primary);">브랜드 스토리</a>
+      <a href="store_menu.html">매장/메뉴</a>
+      <a href="review.html">후기</a>
+      <a href="community.html">커뮤니티</a>
+      <a class="nav-cta">스마트스토어</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="intro container">
+    <h1>신뢰를 기준으로<br>운영되는 브랜드</h1>
+    <p>품장은 기준과 구조부터 다르게 설계합니다.</p>
+  </section>
+
+  <div class="brand-tab">
+    <button class="active" onclick="showStory()">BRAND STORY</button>
+    <button onclick="showSystem()">BRAND SYSTEM</button>
+  </div>
+
+  <!-- ===== BRAND STORY (5) ===== -->
+  <section id="story">
+    <div class="container scene">
+      <div class="scene-text"><span>STORY 01</span><h2>시작의 이유</h2><p>품장은 기준 없는 유통 구조에 의문을 가지며 시작되었습니다.</p></div>
+      <div class="scene-image"></div>
+    </div>
+    <div class="container scene reverse">
+      <div class="scene-text"><span>STORY 02</span><h2>다르게 보는 기준</h2><p>가격보다 과정, 속도보다 신뢰를 봅니다.</p></div>
+      <div class="scene-image"></div>
+    </div>
+    <div class="container scene">
+      <div class="scene-text"><span>STORY 03</span><h2>상품을 대하는 태도</h2><p>직접 확인하지 않은 상품은 취급하지 않습니다.</p></div>
+      <div class="scene-image"></div>
+    </div>
+    <div class="container scene reverse">
+      <div class="scene-text"><span>STORY 04</span><h2>고객과의 관계</h2><p>한 번의 거래보다 다시 찾는 이유를 만듭니다.</p></div>
+      <div class="scene-image"></div>
+    </div>
+    <div class="container scene">
+      <div class="scene-text"><span>STORY 05</span><h2>우리가 지키는 약속</h2><p>문제가 생기면 끝까지 책임집니다.</p></div>
+      <div class="scene-image"></div>
+    </div>
+  </section>
+
+  <!-- ===== BRAND SYSTEM (3) ===== -->
+  <section id="system">
+    <div class="container scene">
+      <div class="scene-text"><span>SYSTEM 01</span><h2>상품 검증 시스템</h2><p>내부 기준을 통과한 상품만 다룹니다.</p></div>
+      <div class="scene-image"></div>
+    </div>
+    <div class="container scene reverse">
+      <div class="scene-text"><span>SYSTEM 02</span><h2>유통 관리 구조</h2><p>입고부터 출고까지 전 과정을 관리합니다.</p></div>
+      <div class="scene-image"></div>
+    </div>
+    <div class="container scene">
+      <div class="scene-text"><span>SYSTEM 03</span><h2>CS 대응 프로세스</h2><p>회피하지 않는 대응 시스템을 갖추고 있습니다.</p></div>
+      <div class="scene-image"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>© 2026 SAMWON STORE. All rights reserved.</footer>
+
+<script>
+  const story=document.getElementById('story');
+  const system=document.getElementById('system');
+  function showStory(){story.style.display='block';system.style.display='none';setTab(0);}
+  function showSystem(){story.style.display='none';system.style.display='block';setTab(1);}
+  function setTab(i){
+    document.querySelectorAll('.brand-tab button')
+      .forEach((b,n)=>b.classList.toggle('active',n===i));
+  }
+  const io=new IntersectionObserver(e=>{
+    e.forEach(v=>{if(v.isIntersecting)v.target.classList.add('show');});
+  },{threshold:.35});
+  document.querySelectorAll('.scene').forEach(s=>io.observe(s));
+</script>
+
+</body>
+</html>
